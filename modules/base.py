@@ -12,7 +12,8 @@ def init(data: dict) -> dict:
     cap_finder = cv2.VideoCapture(0)
     capture = {}
     capture['finder'] = cap_finder
-    output['capture'] = capture
+    del cap_finder
+    output = locals()
     return output
 
 
