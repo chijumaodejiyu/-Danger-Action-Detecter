@@ -1,5 +1,5 @@
 import numpy as np
-# main.py
+# main.py -->ltdxsy
 
 
 def main():
@@ -16,7 +16,7 @@ def main():
         pass
 
 
-# modules/base.py
+# modules/base.py -->cjmdjy
 
 
 def init(data: dict) -> dict:
@@ -37,7 +37,7 @@ def get_image(capture) -> np.ndarray:
     pass
 
 
-# modules/detect.py
+# modules/detect.py -->cjmdjy
 
 
 def simple_detect(image: np.ndarray) -> (bool, np.ndarray):
@@ -58,7 +58,7 @@ def part_detect(image: np.ndarray) -> (np.float64, np.float64, np.float64):
     pass
 
 
-# modules/action.py
+# modules/action.py -->cjmdjy,ltdxsy
 
 
 def action(loc: dict):
