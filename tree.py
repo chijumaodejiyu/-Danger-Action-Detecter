@@ -1,5 +1,5 @@
 import numpy as np
-# main.py
+# main.py  -> ltdxsy
 
 
 def main():
@@ -15,13 +15,13 @@ def main():
         pass
 
 
-# modules/base.py
+# modules/base.py  -> cjmdjy
 
 
-def init(data: dict) -> dict:
+def init(loc: dict) -> dict:
     """
-    利用data初始化并以字典形式返回的所需变量
-    :param data: 以字典形式储存的所需数据
+    利用loc初始化并以字典形式返回的所需变量
+    :param loc: 以字典形式储存的所需数据
     :return: 以字典形式返回的所需变量（包含：'servo', 'capture' 等）
     """
     pass
@@ -36,10 +36,10 @@ def get_image(capture) -> np.ndarray:
     pass
 
 
-# modules/detect.py
+# modules/detect.py  -> ltdxsy, cjmdjy
 
 
-def simple_detect(image: np.ndarray) -> (bool, np.ndarray):
+def simple_detect(image: np.ndarray) -> (bool, np.ndarray):  # -> ltdxsy
     """
     从指定图片中简单的检测危险行为并返回判断结果和大致发生的区域图片
     :param image: 指定检测的图片
@@ -57,7 +57,7 @@ def part_detect(image: np.ndarray) -> (np.float64, np.float64, np.float64):
     pass
 
 
-# modules/action.py
+# modules/action.py  -> ltdxsy, cjmdjy
 
 
 def action(loc: dict):
@@ -84,6 +84,7 @@ def draw(loc: dict) -> bool:
     :param loc: 变量库
     :return: 执行结果
     """
+    pass
 
 
 def show(loc: dict) -> bool:
@@ -92,3 +93,4 @@ def show(loc: dict) -> bool:
     :param loc: 变量库
     :return: 执行结果
     """
+    pass
