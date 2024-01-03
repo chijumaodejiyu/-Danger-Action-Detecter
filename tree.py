@@ -4,12 +4,11 @@ import numpy as np
 
 def main():
     init_dict = init()
-    servo_dict = init_dict['servo']
     capture_dict = init_dict['capture']
     image = get_image(capture_dict['finder'])
     simple_judgment, part_image = simple_detect(image)
     if simple_judgment:
-        angel = part_detect(part_image)
+        vector = part_detect(part_image)
         loc = locals()  # 把所有变量变为字典形式
         action(loc)
     else:
@@ -69,3 +68,27 @@ def action(loc: dict):
     """
     pass
 
+
+def track(loc: dict) -> bool:
+    """
+    利用loc['servo']['track']的舵机控制模块旋转至指定向量
+    :param loc: 变量库
+    :return: 执行结果
+    """
+    pass
+
+
+def draw(loc: dict) -> bool:
+    """
+    在loc['screen']['picture']的基础上进行额外绘制行为并重写入loc['screen']['picture']
+    :param loc: 变量库
+    :return: 执行结果
+    """
+
+
+def show(loc: dict) -> bool:
+    """
+    利用loc['screen']显示界面
+    :param loc: 变量库
+    :return: 执行结果
+    """
