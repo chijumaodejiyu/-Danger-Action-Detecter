@@ -8,10 +8,12 @@ def init(data: dict) -> dict:
     :param data: 以字典形式储存的所需数据
     :return: 以字典形式返回的所需变量（包含：'servo', 'capture' 等）
     """
-    out = {}
+    output = {}
     cap_finder = cv2.VideoCapture(0)
-    out['finder'] = cap_finder
-    return out
+    capture = {}
+    capture['finder'] = cap_finder
+    output['capture'] = capture
+    return output
 
 
 def get_image(capture) -> np.ndarray:
@@ -21,3 +23,9 @@ def get_image(capture) -> np.ndarray:
     :return: 从摄像头中获取的图片
     """
     pass
+
+
+if __name__ == '__main__':
+    data = {}
+    capture_channel = {'finder': 0, 'tracker': 1}
+    data['capture_channel'] = capture_channel

@@ -3,7 +3,9 @@ import numpy as np
 
 
 def main():
-    init_dict = init()
+
+    loc = locals()
+    init_dict = init(loc)
     servo_dict = init_dict['servo']
     capture_dict = init_dict['capture']
     image = get_image(capture_dict['finder'])
@@ -19,10 +21,10 @@ def main():
 # modules/base.py -->cjmdjy
 
 
-def init(data: dict) -> dict:
+def init(loc: dict) -> dict:
     """
-    利用data初始化并以字典形式返回的所需变量
-    :param data: 以字典形式储存的所需数据
+    利用loc初始化并以字典形式返回的所需变量
+    :param loc: 以字典形式储存的所需数据
     :return: 以字典形式返回的所需变量（包含：'servo', 'capture' 等）
     """
     pass
@@ -58,7 +60,7 @@ def part_detect(image: np.ndarray) -> (np.float64, np.float64, np.float64):
     pass
 
 
-# modules/action.py -->cjmdjy,ltdxsy
+# modules/action.py -->cjmdjy, ltdxsy
 
 
 def action(loc: dict):
