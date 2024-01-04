@@ -1,4 +1,7 @@
 import numpy as np
+import threading
+
+
 # main.py  -> ltdxsy
 
 
@@ -21,10 +24,10 @@ def main():
         pass
 
 
-# modules/base.py  -> cjmdjy
+# modules/base.py  -> cjmdjy, ltdxsy
 
 
-def init(loc: dict) -> dict:
+def init(loc: dict) -> dict:  # -> ltdxsy
     """
     利用loc初始化并以字典形式返回的所需变量
     :param loc: 以字典形式储存的所需数据
@@ -54,7 +57,7 @@ def get_part_image(image, item_bbox) -> np.ndarray:
 # modules/detect.py  -> ltdxsy, cjmdjy
 
 
-def simple_detect(image: np.ndarray) -> (bool, np.ndarray):  # -> ltdxsy
+def simple_detect(image: np.ndarray) -> (bool, np.ndarray):
     """
     从指定图片中简单的检测危险行为并返回判断结果和其item_bbox
     :param image: 指定检测的图片
@@ -63,7 +66,7 @@ def simple_detect(image: np.ndarray) -> (bool, np.ndarray):  # -> ltdxsy
     pass
 
 
-def part_detect(image: np.ndarray) -> np.float64:
+def part_detect(image: np.ndarray) -> np.float64:  # -> ltdxsy
     """
     从指定图片中准确检测危险行为并返回置信度
     :param image: 指定检测的图片
@@ -107,5 +110,46 @@ def show(loc: dict) -> bool:
     利用loc['screen']显示界面
     :param loc: 变量库
     :return: 执行结果
+    """
+    pass
+
+
+# Visual_threads.py
+def get_cap_list():
+    """
+        调用PyCameraList获取可用摄像头的名称及id
+        :return: 以字典形式返回所有的摄像头信息
+        {
+            0 : 'Intel(R) RealSense(TM) 3D Camera (Front F200) RGB',
+            1 : 'NewTek NDI Video'
+        }
+    """
+    pass
+
+
+class Visual(threading.Thread):
+    def __init__(self, camera_id, img_height, img_width):
+        super(Visual, self).__init__()
+        pass
+
+    def get_frame(self) -> np.ndarray:
+        """
+        获取视频推流的接口方法
+        :return: self.frame的重置大小后的摄像头画面
+        """
+        pass
+
+    def run(self):
+        """
+        打开cap获取画面
+        :return: 向get_frame方法传参
+        """
+        pass
+
+
+def test():
+    """
+    Visual类的测试方法
+    :return: 测试画面显示窗口
     """
     pass
