@@ -1,10 +1,13 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 import time
-from models.pca9685 import PCA9685
+from modules.pca9685 import PCA9685
+import threading
 
 pwm = PCA9685(0x40, debug=True)  # 对象初始化，指定IIC地址
 pwm.setPWMFreq(50)  # 设置PWM的频率
+thread_lock = threading.Lock()  # 全局线程锁
+thread_exit = False  # 定义全局变量thread_exit,标志主线程退出，初始化False
 
 
 class Servo:
@@ -31,9 +34,12 @@ class Servo:
             return False
 
     def run(self, angle):
+        global thread_exit
         if self.check(angle):
+            thread_lock.acquire()
             pwm.set_servo_angle(self.cel, angle)
             self.deg = angle
+            thread_lock.release()
 
     def information(self):
         print(self.deg)
