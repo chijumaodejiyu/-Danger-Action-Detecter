@@ -3,14 +3,20 @@ import numpy as np
 
 
 def main():
-    init_dict = init()
-    capture_dict = init_dict['capture']
-    image = get_image(capture_dict['finder'])
-    simple_judgment, part_image = simple_detect(image)
+
+    loc = locals()  # 把所有变量变为字典形式
+    init_dict = init(loc)  # 初始化所需变量
+    capture_dict = init_dict['capture']  # 解出 'capture'
+    image = get_image(capture_dict['finder'])  # 获取 'finder' 的图片
+    simple_judgment, item_bbox = simple_detect(image)  # 初步检测
     if simple_judgment:
-        vector = part_detect(part_image)
-        loc = locals()  # 把所有变量变为字典形式
-        action(loc)
+        part_image = get_part_image(image, item_bbox)  # 获取疑似危险行为相关的区域图片
+        judgment = part_detect(part_image)  # 精准检测
+        # 数据整合为字典
+        loc = locals()
+        del loc['init_dict']
+        loc = loc | init_dict
+        action(loc)  # 执行特定行为
     else:
         pass
 
@@ -36,23 +42,32 @@ def get_image(capture) -> np.ndarray:
     pass
 
 
+def get_part_image(image, item_bbox) -> np.ndarray:
+    """
+    利用指定item_bbox在image中截取部分区域图片并返回
+    :param image: 原图片
+    :param item_bbox: 以(x1, y1, x2, y2, '', id)形式储存的数据
+    :return: 在image中截取部分区域图片并返回
+    """
+
+
 # modules/detect.py  -> ltdxsy, cjmdjy
 
 
 def simple_detect(image: np.ndarray) -> (bool, np.ndarray):  # -> ltdxsy
     """
-    从指定图片中简单的检测危险行为并返回判断结果和大致发生的区域图片
+    从指定图片中简单的检测危险行为并返回判断结果和其item_bbox
     :param image: 指定检测的图片
-    :return: (判断结果, 大致发生的区域图片)
+    :return: (判断结果, 其item_bbox)
     """
     pass
 
 
-def part_detect(image: np.ndarray) -> (np.float64, np.float64, np.float64):
+def part_detect(image: np.ndarray) -> np.float64:
     """
-    从指定图片中准确检测危险行为并返回危险行为的方向向量
+    从指定图片中准确检测危险行为并返回置信度
     :param image: 指定检测的图片
-    :return: 危险行为的方向向量
+    :return: 危险行为的置信度
     """
     pass
 
