@@ -1,6 +1,7 @@
 import numpy as np
 import mediapipe as mp
 import threading
+from Visual_threads import get_cap_list, Visual
 
 
 def init(loc: dict) -> dict:
@@ -87,4 +88,19 @@ def get_image(capture) -> np.ndarray:
     :param capture: 指定的摄像头
     :return: 从摄像头中获取的图片
     """
-    pass
+    init_threads(l)
+    img_height = 480
+    img_width = 640
+    camera_id = capture
+    thread = Visual(camera_id, img_height, img_width)
+    thread.start()
+
+    while not thread_exit:
+        thread_lock.acquire()
+        frame = thread.get_frame()
+        thread_lock.release()
+        cv2.imshow('Video', frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            thread_exit = True
+    thread.join()
+
