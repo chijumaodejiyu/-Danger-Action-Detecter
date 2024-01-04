@@ -1,7 +1,5 @@
 import cv2
 import numpy as np
-import time
-import os
 from copy import deepcopy
 import threading
 from PyCameraList.camera_device import list_video_devices
@@ -45,7 +43,7 @@ class Visual(threading.Thread):
         :return: 向get_frame方法传参
         """
         global thread_exit
-        cap = cv2.VideoCapture(self.camera_id)
+        cap = cv2.VideoCapture(int(self.camera_id))
         while not thread_exit:
             ret, frame = cap.read()
             if ret:
@@ -55,6 +53,7 @@ class Visual(threading.Thread):
                 thread_lock.release()
             else:
                 thread_exit = True
+                print("无法读取摄像头")
         cap.release()
 
 
@@ -75,11 +74,11 @@ def test():
     :return: 测试画面显示窗口
     """
     global thread_exit
-    camera_id = 0
     img_height = 480
     img_width = 640
     cap_list = get_cap_list()
     print(cap_list)
+    camera_id = int(input("输入测试对象摄像头ID："))
     thread = Visual(camera_id, img_height, img_width)
     thread.start()
 
@@ -87,7 +86,6 @@ def test():
         thread_lock.acquire()
         frame = thread.get_frame()
         thread_lock.release()
-
         cv2.imshow('Video', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             thread_exit = True
