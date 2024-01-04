@@ -40,6 +40,10 @@ class Visual(threading.Thread):
         return deepcopy(self.frame)
 
     def run(self):
+        """
+        打开cap获取画面
+        :return: 向get_frame方法传参
+        """
         global thread_exit
         cap = cv2.VideoCapture(self.camera_id)
         while not thread_exit:
