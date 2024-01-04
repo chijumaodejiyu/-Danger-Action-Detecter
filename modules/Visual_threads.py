@@ -4,18 +4,23 @@ import time
 import os
 from copy import deepcopy
 import threading
+from PyCameraList.camera_device import list_video_devices
 
 thread_lock = threading.Lock()
 thread_exit = False
 
 
-class Visual:
+class Visual(threading.Thread):
     def __init__(self, camera_id, img_height, img_width):
         super(Visual, self).__init__()
         self.camera_id = camera_id
         self.img_height = img_height
         self.img_width = img_width
         self.frame = np.zeros((img_height, img_width, 3), dtype=np.uint8)
+
+    def get_cap_list(self):
+        cameras = list_video_devices()
+        return cameras
 
     def get_frame(self):
         return deepcopy(self.frame)
